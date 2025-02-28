@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greetings for Ritu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .message {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+            transition: all 0.5s ease;
+        }
+        
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .emoji-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .emoji {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .emoji:hover {
+            transform: scale(1.2);
+        }
+        
+        .time {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .animation {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="message">रितु जी मुस्कुराइए <i class="ri-ghost-smile-fill"></i></h1>
+        
+        <div class="btn-container">
+            <button class="btn greet-btn">सुप्रभात रितु जी</button>
+            <button class="btn quote-btn">आज का विचार</button>
+            <button class="btn compliment-btn">कुछ खास</button>
+        </div>
+        
+        <div class="emoji-container">
+            <span class="emoji" data-emoji="❤️">❤️</span>
+            <span class="emoji" data-emoji="😊">😊</span>
+            <span class="emoji" data-emoji="🌹">🌹</span>
+            <span class="emoji" data-emoji="✨">✨</span>
+            <span class="emoji" data-emoji="🎁">🎁</span>
+        </div>
+        
+        <div class="time"></div>
+    </div>
+
+    <script>
+        // Elements
+        const message = document.querySelector(".message");
+        const greetBtn = document.querySelector(".greet-btn");
+        const quoteBtn = document.querySelector(".quote-btn");
+        const complimentBtn = document.querySelector(".compliment-btn");
+        const emojis = document.querySelectorAll(".emoji");
+        const timeDisplay = document.querySelector(".time");
+        
+        // Array of quotes
+        const quotes = [
+            "हर दिन एक नई शुरुआत है।",
+            "जीवन के हर पल का आनंद लें।",
+            "मुस्कुराहट आपकी सबसे सुंदर गहना है।",
+            "आज का दिन आपके लिए मंगलमय हो।",
+            "खुशियों से भरा रहे आपका हर दिन।"
+        ];
+        
+        // Array of compliments
+        const compliments = [
+            "आप बहुत अच्छी हैं रितु जी!",
+            "आपकी मुस्कान बहुत खूबसूरत है!",
+            "आप जैसा कोई नहीं!",
+            "आप हमेशा सबकी मदद करती हैं!",
+            "आपकी सोच बहुत सकारात्मक है!"
+        ];
+        
+        // Update time function
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            };
+            timeDisplay.textContent = now.toLocaleTimeString('hi-IN', options);
+        }
+        
+        // Initial time set and interval
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        // Add event listeners
+        greetBtn.addEventListener("click", function() {
+            const currentHour = new Date().getHours();
+            let greeting = "";
+            
+            if (currentHour < 12) {
+                greeting = "सुप्रभात रितु जी";
+            } else if (currentHour < 17) {
+                greeting = "शुभ दोपहर रितु जी";
+            } else {
+                greeting = "शुभ संध्या रितु जी";
+            }
+            
+            message.innerHTML = `${greeting} <i class="ri-heart-fill animation"></i>`;
+            message.style.color = "#ff4757";
+        });
+        
+        quoteBtn.addEventListener("click", function() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            message.innerHTML = `${randomQuote} <i class="ri-star-fill"></i>`;
+            message.style.color = "#5352ed";
+        });
+        
+        complimentBtn.addEventListener("click", function() {
+            const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+            message.innerHTML = `${randomCompliment} <i class="ri-emotion-happy-fill"></i>`;
+            message.style.color = "#2ed573";
+        });
+        
+        // Add emoji click events
+        emojis.forEach(emoji => {
+            emoji.addEventListener("click", function() {
+                const selectedEmoji = this.getAttribute("data-emoji");
+                message.innerHTML += ` ${selectedEmoji}`;
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
